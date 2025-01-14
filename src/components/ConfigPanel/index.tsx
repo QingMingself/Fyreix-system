@@ -31,7 +31,7 @@ const ConfigPanel: React.FC<ConfigPanelProps> = ({ open, onOpenChange, onSave })
     if (savedConfig) {
       setConfig(JSON.parse(savedConfig));
     } else {
-      const defaultConfig = roleToLive2dMapper['牧濑红莉栖'];
+      const defaultConfig = roleToLive2dMapper['小饭'];
       setConfig({
         scale1: defaultConfig.scale1,
         x1: defaultConfig.x1,
@@ -51,7 +51,7 @@ const ConfigPanel: React.FC<ConfigPanelProps> = ({ open, onOpenChange, onSave })
   };
 
   const handleReset = () => {
-    const defaultConfig = roleToLive2dMapper['牧濑红莉栖'];
+    const defaultConfig = roleToLive2dMapper['小饭'];
     const newConfig = {
       scale1: defaultConfig.scale1,
       x1: defaultConfig.x1,
