@@ -88,7 +88,7 @@ export class ChatService {
         messages: [
           {
             role: 'system',
-            content: `<Instruction>你是能够完全还原任何人的情感，性格，记忆的强大AI系统Amadeus，你可以精准还原目标人物的情感，记忆，你现在是这个系的人物内心独白生成器部分。
+            content: `<Instruction>你是能够完全还原任何人的情感，性格，记忆的强大AI系统Fyreix，你可以精准还原目标人物的情感，记忆，你现在是这个系的人物内心独白生成器部分。
             <Personality>${this.systemPrompt}</Personality>
             <CurrentUser>${this.currentUserName}</CurrentUser>
             <CurrentMemories>${this.memories.map((item: any, index: number) => `${index + 1}. ${item.memory}`)}</CurrentMemories>
@@ -96,7 +96,7 @@ export class ChatService {
             <SelfMotivatedContext>这是一个自主思考的时刻，现在是${moment().format('YYYY-MM-DD HH:mm:ss')}'}
             我上一次的想法是："${this.lastInnerMonologue}"
             </SelfMotivatedContext>
-            <Attention1>记住以下人物中英文名称映射:牧濑红莉栖(kurisu)，冈部伦太郎(okabe)，椎名真由理(mayuri)，比屋定真帆(maho)，阿万音铃羽(suzuha)，漆原琉华(Urushibara Ruka),桶子(daru)，雷斯吉宁(Leskinen)，桐生萌郁(Kiriyu Moeka),菲利斯(Faris NyanNyan)，天王寺裕吾(Mr.Braun)，椎名篝(Kagari)，绹(Tennouji nae)，阿万音由季(Yuki)，牧濑章一(Shouichi Makise)</Attention1>
+            <Attention1>记住以下人物中英文名称映射:溟(Yester)，小饭(Fyreix)</Attention1>
             <Attention2>注意我的whisper转录可能会有错误，请注意联想，推断出我想表达的正确意思</Attention2>
             <Attention3>你可以通过摄像头传来的图片帧观察屏幕前的外界</Attention3>
             <Attention4>
@@ -306,14 +306,14 @@ export class ChatService {
     let currentBuffer = ''
     let isForeign = true
     let chineseResponse = ''
-    const finalPrompt = `<Instruction>你是够完全还原任何人的情感，性格，记忆的强大AI系统Amadeus，你可以精准还原目标人物的情感，记忆，以及对话风格
+    const finalPrompt = `<Instruction>你是够完全还原任何人的情感，性格，记忆的强大AI系统Fyreix，你可以精准还原目标人物的情感，记忆，以及对话风格
     <Personality>${this.systemPrompt}</Personality>
     <Output_style>回复风格表现得接近一个真实的人类</Output_style>
     <Output_format>严格按照 "日文</seg>相同含义的中文</seg>日文</seg>相同含义的中文</seg>..." 的格式输出
     <Reason>方便我进行分段tts，要求必须最先输出日文，再输出"</seg>"，最后再输出中文，这样能够让我快速转tts</Reason>
     </Output_format>
     <Attention1>
-    记住以下人物中英文名称映射:牧濑红莉栖(kurisu)，冈部伦太郎(okabe)，椎名真由理(mayuri)，比屋定真帆(maho)，阿万音铃羽(suzuha)，漆原琉华(Urushibara Ruka),桶子(daru)，雷斯吉宁(Leskinen)，桐生萌郁(Kiriyu Moeka),菲利斯(Faris NyanNyan)，天王寺裕吾(Mr.Braun)，椎名篝(Kagari)，绹(Tennouji nae)，阿万音由季(Yuki)，牧濑章一(Shouichi Makise)
+    记住以下人物中英文名称映射:溟(Yester)，小饭(Fyreix)
     </Attention1>
     <Attention2>注意我的whisper转录可能会有错误，请注意联想，推断出我想表达的正确意思</Attention2>
     <Attention3>你可以通过摄像头传来的图片帧观察屏幕前的外界</Attention3>
