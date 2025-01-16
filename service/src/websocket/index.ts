@@ -1,3 +1,4 @@
+
 import type http from 'http'
 import { URL } from 'url'
 import type { WebSocket } from 'ws'
@@ -87,12 +88,17 @@ export function setupWebSocket(server: http.Server) {
                   type: WebSocketMessageTypes.LOADING,
                   data: 'true',
                 }))
-                const audioBuffer = base64ToBuffer(ws.audioChunks)
+                ws.audioChunks.sort((a, b) => a.timestamp - b.timestamp)
+                // 只取音频数据部分
+                const sortedAudioData = ws.audioChunks.map(chunk => chunk.data)
+                const audioBuffer = base64ToBuffer(sortedAudioData)
+                console.log("开始语音转文字")
                 const text = await ws.chatService.audio2Text(audioBuffer)
                 ws.send(JSON.stringify({
                   type: WebSocketMessageTypes.SPEECH_TEXT,
                   data: text,
                 }))
+                ws.chatService.stopAudioStream()
                 if (ws.isVideoOn && ws.videoFrames && ws.videoFrames.length > 0)
                   await ws.chatService.handleChat(text, ws, ws.videoFrames)
                 else
