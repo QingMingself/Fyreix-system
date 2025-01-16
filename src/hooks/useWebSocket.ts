@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { WebSocketMessage, WebSocketMessageTypes } from '../constants'
 import { useStore } from '@/store/storeProvider'
@@ -115,12 +116,6 @@ export function useWebSocket({ url, onMessage, onOpen, onClose, onError }: UseWe
     setIsRecording(false)
   }, [sendMessage])
 
-  const sendAudioChunk = useCallback((base64AudioData: string) => {
-    if (isRecording)
-      sendMessage({ type: WebSocketMessageTypes.AUDIO_CHUNK, data: base64AudioData })
-    else
-      console.warn('未在录音状态,无法发送音频数据')
-  }, [isRecording, sendMessage])
 
   const disconnect = useCallback(() => {
     if (wsRef.current) {
@@ -139,7 +134,6 @@ export function useWebSocket({ url, onMessage, onOpen, onClose, onError }: UseWe
     sendMessage,
     startSpeech,
     endSpeech,
-    sendAudioChunk,
     connect,
     setAiResponse,
     disconnect,
