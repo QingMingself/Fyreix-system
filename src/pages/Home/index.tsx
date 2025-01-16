@@ -1,3 +1,4 @@
+
 import styles from './index.module.less'
 import { useMicVAD } from '@ricky0123/vad-react'
 import { usePlayer } from '@/hooks/usePlayer'
@@ -20,6 +21,11 @@ interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
   timestamp: number;
+}
+
+interface AudioChunk {
+  timestamp: number;
+  data: string; // base64 音频数据
 }
 
 const VoiceAssistant = observer(() => {
@@ -51,7 +57,7 @@ const VoiceAssistant = observer(() => {
   const [showStartDialog, setShowStartDialog] = useState(false);
 
   const handleWebSocketMessage = useRef((message: WebSocketMessage) => {
-    console.log('Received message type:', message.type)
+    console.log('收到消息类型:', message.type)
     switch (message.type) {
       case WebSocketMessageTypes.AI_AUDIO_CHUNK: {
         if (message.data && typeof message.data === 'string')
@@ -157,7 +163,10 @@ const VoiceAssistant = observer(() => {
       const latestChunk = audioChunks[audioChunks.length - 1]
       sendMessage({
         type: WebSocketMessageTypes.AUDIO_CHUNK,
-        data: latestChunk,
+        data: {
+          timestamp: Date.now(),
+          data: latestChunk
+        } as AudioChunk
       })
     }
   }, [audioChunks, sendMessage])
