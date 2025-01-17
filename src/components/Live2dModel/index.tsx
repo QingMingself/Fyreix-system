@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Live2DModel, MotionPriority } from 'pixi-live2d-display';
 import AnimationControl from './AnimationControl';
-import { roleToLive2dMapper } from '@/constants/live2d';
 import { useBasicLayout } from '@/hooks/useBasicLayout';
 import { useStore } from '@/store/storeProvider';
 import { observer } from 'mobx-react';
